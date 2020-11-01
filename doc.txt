@@ -1,0 +1,41 @@
+Döküman
+
+
+Problem: İsim, Soyisim, Yaş MangoDB'ye kayıt eden ve silen NodeJS servisleri yazılmalı. Bu servis Docker üzerinde çalışmalı.
+
+
+Yapılanlar: 
+
+NodeJS ile Kodlama yaparken daha düzenli olması açısından Model, Database, Router gibi klasörler kullandım.
+Model klasörümün içinde User'a ait olan Entity'im bulunmaktadır. Burada User'a ait olan İsim, Soyisim, Yaş gibi özelliklerin nasıl olması gerektiğini vurgulayacak şekilde tasarlamaya özen gösterdim.
+Database klasörümde ise Connection sağladığım kodu yazdım. Burada bağımlılığı düşürüp okunabilirliği arttırmayı hedefledim.
+Router klasörümde ise rotalarımı belirledim. Hangi requestte nasıl davranılmasını istiyorsam o şekilde tasarlamaya çalıştım. Try-Catch yapısını kullanmaya özen gösterdim. Burada Ekleme ve Silme işlemlerini gerçekleştirdim. Konu ilgimi çektiği için insiyatif alarak güncelleme ve listeleme de ekledim.
+restfull.http kısmında ise postman kullanmak istemediğim için REST Client eklentisini kullanarak Get, Post, Delete, Patch işlemlerini burada gerçekleştirdim. 'Send Request' ile talep gönderip gerekli işlemlerin yapılması için tetikliyorum.
+Tüm bu işlemler sonucunda 'Dockerfile' dosyasında dockerize işlemi gerçekleştirildi. Mongodb ile birlikte çalışabilmesi için docker-compose yapısı kullanıldı.
+Docker Compose yapısı ile proje başarılı bir şekilde ayağa kaldırıldı.
+
+
+Eklentiler 
+
+-Rest Client : Http Request'leri gerçekleştirmek için kullanıldı.
+-Eslint : Syntax hatalarını önlemek için kullanıldı.
+
+Çalışma Rotası
+
+Gereklilikler : Rest Client uygulamasının kurulması gerekmektedir. Bu sayede 'restfull.http' dosyasında 'Send Request' ile tetikleme işlemi yapılır. 4 ayrı işlem mevcuttur.
+1. User Listeleme
+2. User Ekleme
+3. User Güncelleme
+4. User Silme
+
+- User Listeleme İşlemi : Userların listelenmesi istenildiğinde 'restfull.http' dosyası açılmalıdır. ' GET {{BASE_URL}}/users ' üstündeki 'Send Request' ile talep gönderilebilir.
+Not: Tüm kullanıcılar uygulama ayağa kaldırıldığında 3000 portunda ekranda gösterilmektedir.
+
+- User Ekleme İşlemi : Bir user eklenmek istenildiğinde 'restfull.http' dosyası açılmalıdır. ' POST {{BASE_URL}}/users kısmında Contentin içine isim, soyisim, yaş gibi içerikler girilip 'Send request' ile talep gönderilebilir.
+Not: Ekleme işlemlerinde Validation kontrolleri yapılmıştır.
+
+- User Güncelleme İşlemi: Bir user güncellenmek istenildiğinde 'restfull.http' dosyası açılmalıdır. 'PATCH {{BASE_URL}}/users/id kısmında güncellenmek istenilen alanlar girilerek güncelleme sağlanır. 'Send request' ile talep gönderilebilir.
+Not: Güncelleme kısmında id hazır bir şekilde eklenilmiştir.
+
+- User Silme İşlemi: Bir user silinmek istenildiğinde 'restfull.http' dosyası açılmalıdır. DELETE {{BASE_URL}}/users/id kısmında 'Send Request' ile talep yollanabilir ve kullanıcı silinebilir.
+Not: Silme işleminde id kontrolü formata göre ve kullanıcı kontrolüne göre yapılmaktadır.

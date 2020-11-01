@@ -1,0 +1,26 @@
+@BASE_URL= http://localhost:3000/api
+
+
+GET {{BASE_URL}}/users
+###
+POST {{BASE_URL}}/users
+Content-Type: application/json
+
+{
+    "isim": "Uğur",
+    "soyisim": "Açıkgöz",
+    "yas": 25
+}
+###
+PATCH  {{BASE_URL}}/users/5f74474852233800113fac7e
+Content-Type: application/json
+
+{
+    "isim": "Silinecek",
+    "soyisim": "Veri",
+    "yas": 24
+}
+###
+DELETE {{BASE_URL}}/users/5f74474852233800113fac7e
+Content-Type: application/json
+

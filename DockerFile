@@ -1,0 +1,23 @@
+# Dockerhub üzerinden resmi Node 8 image'ını temel alarak bir image oluşturuldu
+FROM node:8
+
+# Uygulamamızın bulunacağı klasörü oluşturuldu
+RUN mkdir -p /var/www/app
+
+# Komutlarımızın çalıştırılacağı dizini seçildi
+WORKDIR /var/www/app
+
+# package.json dosyamızı çalışma dizinine kopyalandı
+COPY package.json /var/www/app
+
+# Bağımlılıkları kuruldu
+RUN npm install
+
+# Tüm proje dosyalarını docker image'ına kopyalandı
+COPY . /var/www/app
+
+# Uygulamanın çalışacağı port
+EXPOSE 3000
+
+# Projeyi ayağa kaldıracak komut çalıştırıldı
+CMD ["npm", "run", "prod"]
